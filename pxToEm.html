@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>em 계산기</title>
+    </head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: lavender;
+        }
+
+        .calc {
+            text-align: center;
+            width: 40%;
+            height: 60%;
+            border-radius: 10px;
+            border: 1px solid #fff;
+            background-color: lightslategray;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        label {
+            font-weight: 700;
+        }
+
+        input {
+            display: block;
+            width: 500px;
+            height: 30px;
+            border-radius: 50px;
+            border: 1px solid #fff;
+            padding: 20px;
+            font-size: 20px;
+            color: #fff;
+            background-color: lightslategray;
+        }
+
+        h2 {
+            margin-top: 50px;
+            color: yellow;
+            font-size: 36px;
+        }
+
+        .input {
+            text-align: left;
+        }
+
+        button {
+            width: 500px;
+            height: 50px;
+            margin-top: 10px;
+            border-radius: 10px;
+            color: #fff;
+            background-color: cornflowerblue;
+            font-size: 18px;
+            border: none;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+
+        #wantPx {
+            color: #fff;
+            font-size: 24px;
+        }
+
+        #em {
+            color: yellow;
+            font-size: 36px;
+        }
+    </style>
+    <body>
+        <div class="calc">
+            <h2>em 계산기</h2>
+            <form>
+                <div class="input">
+                    <label for="base">기본 폰트(px)</label>
+                    <input id="base" type="number" value="16" />
+                </div>
+                <div class="input">
+                    <label for="want">원하는 px값</label>
+                    <input id="want" type="number" value="40" />
+                </div>
+                <button type="button" onclick="pxToEm()">em 값 계산</button>
+            </form>
+            <div class="result">
+                <span id="wantPx"></span><strong id="em"></strong>
+            </div>
+        </div>
+
+        <script>
+            function pxToEm() {
+                const basePx = Number(document.getElementById("base").value);
+                const wantPx = Number(document.getElementById("want").value);
+                const em = wantPx / basePx;
+
+                document.getElementById("wantPx").innerHTML = `${wantPx}px =`;
+                document.getElementById("em").innerHTML = `${em}em`;
+            }
+        </script>
+    </body>
+</html>
