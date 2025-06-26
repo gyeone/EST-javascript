@@ -82,15 +82,15 @@
 
         <script>
             //변수 이름과 id 이름을 같게 했더니 오류가 나서 다르게 바꿈
+            const inputNumber = document.getElementById("number");
             const btn = document.getElementById("button");
             const result = document.getElementById("result");
             const randomNumber = Math.floor(Math.random() * 10 + 1);
 
             button.addEventListener("click", function (e) {
-                // 전역변수에 선언했더니 입력한 값이 아닌 입력하기 전 초기값 0이 나와서 이벤트 함수 내부로 위치를 옮김
-                const userNumber = Number(
-                    document.getElementById("number").value
-                );
+                // 전역변수에 선언했더니 입력한 값이 아닌 입력하기 전 초기값 0이 나와서 클릭 이벤트 내부로 위치를 옮김
+                //클릭 이벤트 내부에는 value만 넣어주는 것이 DOM 탐색을 더 줄일 수 있어, 외부에 선언 후 변수만 가져와서 value값을 가져오고 number로 변환함
+                const userNumber = Number(inputNumber.value);
 
                 if (userNumber === randomNumber) {
                     result.textContent = `${userNumber} 정답입니다! 🎉 ${randomNumber}`;
