@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>숫자를 맞춰보세요</title>
+    </head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            height: 100vh;
+            background-color: lightpink;
+        }
+
+        section {
+            width: 30%;
+            height: 40%;
+            padding: 50px;
+            text-align: center;
+            background-color: #fff;
+            border-radius: 25px;
+        }
+
+        h1 {
+            font-size: 3.8rem;
+            margin: 40px 0;
+            color: hotpink;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+        }
+
+        input {
+            box-sizing: border-box;
+            text-align: center;
+            width: 200px;
+            height: 100px;
+            font-size: 2.8rem;
+            font-weight: 700;
+            border: 4px solid lightpink;
+            border-radius: 25px;
+            color: hotpink;
+            background-color: blanchedalmond;
+            padding: 0;
+        }
+
+        button {
+            text-align: center;
+            width: 180px;
+            height: 100px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 25px;
+            color: #fff;
+            background-color: hotpink;
+            padding: 0;
+        }
+
+        #result {
+            color: cornflowerblue;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+    </style>
+    <body>
+        <section>
+            <h1>Guess a Number(1~10)</h1>
+            <form>
+                <input id="number" type="number" />
+                <button id="button" type="button">확인</button>
+            </form>
+            <p id="result"></p>
+        </section>
+
+        <script>
+            //변수 이름과 id 이름을 같게 했더니 오류가 나서 다르게 바꿈
+            const btn = document.getElementById("button");
+            const result = document.getElementById("result");
+            const randomNumber = Math.floor(Math.random() * 10 + 1);
+
+            button.addEventListener("click", function (e) {
+                // 전역변수에 선언했더니 입력한 값이 아닌 입력하기 전 초기값 0이 나와서 이벤트 함수 내부로 위치를 옮김
+                const userNumber = Number(
+                    document.getElementById("number").value
+                );
+
+                if (userNumber === randomNumber) {
+                    result.textContent = `${userNumber} 정답입니다! 🎉 ${randomNumber}`;
+                } else if (userNumber > randomNumber) {
+                    result.textContent = `${userNumber} 너무 커요!`;
+                } else {
+                    result.textContent = `${userNumber} 너무 작아요!`;
+                }
+            });
+        </script>
+    </body>
+</html>
