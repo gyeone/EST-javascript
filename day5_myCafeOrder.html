@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <header>
+            <h1>My Cafe 주문 계산기</h1>
+        </header>
+        <form>
+            <p>음료 선택</p>
+            <select name="pickDrink" id="pickDrink">
+                <option value="americano">아메리카노 (2,500원)</option>
+                <option value="latte">카페라떼 (3,500원)</option>
+            </select>
+            <p>사이즈 선택</p>
+            <select name="pickSize" id="pickSize">
+                <option value="small">small</option>
+                <option value="medium">medium (+1,000원)</option>
+                <option value="large">large (+2,000원)</option>
+            </select>
+            <p>수량</p>
+            <input type="number" id="pickCount" />
+            <button type="button" id="button"></button>
+        </form>
+        <footer>
+            <p id="total"></p>
+        </footer>
+
+        <script>
+            const drinkMenu = {
+                americano: 2500,
+                latte: 3500,
+            };
+
+            const cupSize = {
+                small: 0,
+                medium: 1000,
+                large: 2000,
+            };
+
+            const orderMenu = document.getElementById("pickDrink");
+            const orderSize = document.getElementById("pickSize");
+            const orderCount = document.getElementById("pickCount");
+            const btn = document.querySelector("#button");
+            const total = document.querySelector("#total");
+
+            btn.addEventListener("click", (e) => {
+                const selectMenu = orderMenu.value;
+                const selectSize = orderSize.value;
+                const selectCount = Number(orderCount.value);
+                const totalAmount =
+                    (drinkMenu[selectMenu] + cupSize[selectSize]) * selectCount;
+                //유효성 검사
+                if (isNaN(selectCount) || selectCount <= 0) {
+                    alert("0 이상의 숫자를 입력하세요!");
+                    return;
+                }
+                e.preventDefault();
+                total.textContent = `총 금액: ₩${totalAmount} (${selectCount}잔, ${selectSize})`;
+            });
+        </script>
+    </body>
+</html>
