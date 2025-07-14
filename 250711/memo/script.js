@@ -76,7 +76,7 @@ memoForm.addEventListener("submit", (e) => {
     console.log(titleValue);
     // 제목이 비어있으면 경고 메시지
     if (!titleValue) {
-        alert("제목을 입력하세요!");
+        alert("제목을 입력하세요!✏️");
         return;
     }
     // 새 메모 객체를 memoData 배열 맨 앞에 추가
@@ -94,10 +94,6 @@ memoForm.addEventListener("submit", (e) => {
 function deleteMemo(index) {
     // 해당 인덱스의 메모를 배열에서 제거
     memoData.splice(index, 1);
-    console.log(memoData);
-    if (memoData.length === 0) {
-        memoList.innerHTML = "작성된 메모가 없습니다.";
-    }
     // 로컬스토리지 업데이트
     saveMemoStorage();
     // 메모 목록 재렌더링
