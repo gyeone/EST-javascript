@@ -24,6 +24,49 @@ document.getElementById("divide").addEventListener("click", () => {
     calculator(divide);
 });
 
+// ========== Advanced Calculator 기능 ==========
+
+// TODO5-1: 업그레이드 버튼 이벤트 리스너를 추가하세요
+upgradeBtn.addEventListener("click", async () => {
+    // TODO5-2: 사용자 상태를 변경하세요
+    changeUserState(true);
+
+    // TODO5-3: userState를 확인하여 고급 기능을 활성화하세요
+    if (userState) {
+        try {
+            // 동적 import로 advance.js 모듈을 로드하세요
+            const { power, squareRoot } = await import(
+                "./calculator/advance.js"
+            );
+
+            // 고급 계산기 이벤트 리스너를 추가하세요
+            document.getElementById("power").addEventListener("click", () => {
+                calculator(power);
+            });
+
+            document
+                .getElementById("squareRoot")
+                .addEventListener("click", () => {
+                    calculator(squareRoot);
+                });
+
+            // UI를 변경하여 고급 계산기를 표시하고, 고급 기능 활성화 메시지를 화면에 출력하세요
+            document.getElementById("advance-calculator").style.display =
+                "block";
+            upgradeBtn.style.display = "none";
+            resultText.textContent = "고급 계산기 기능이 활성화 되었습니다.";
+        } catch (error) {
+            // 에러 메시지를 콘솔 및 화면에 출력하세요
+            console.error(error);
+            resultText.textContent =
+                "[오류] 고급 계산기 기능을 로드할 수 없습니다.";
+        }
+    } else {
+        // 권한이 없는 경우 "고급 계산기 사용 권한이 없습니다." 메시지를 화면에 출력해주세요.
+        resultText.textContent = "[오류] 고급 계산기 사용 권한이 없습니다.";
+    }
+});
+
 // TODO2-3: 계산기 실행 함수를 완성하세요
 function calculator(operation) {
     try {
@@ -56,44 +99,3 @@ function calculator(operation) {
         resultText.textContent = `[오류] ${error}`;
     }
 }
-
-// ========== Advanced Calculator 기능 ==========
-
-// TODO5-1: 업그레이드 버튼 이벤트 리스너를 추가하세요
-upgradeBtn.addEventListener("click", async () => {
-    // TODO5-2: 사용자 상태를 변경하세요
-    changeUserState(true);
-    // TODO5-3: userState를 확인하여 고급 기능을 활성화하세요
-    if (userState) {
-        try {
-            // 동적 import로 advance.js 모듈을 로드하세요
-            const { power, squareRoot } = await import(
-                "./calculator/advance.js"
-            );
-            // 고급 계산기 이벤트 리스너를 추가하세요
-            document.getElementById("power").addEventListener("click", () => {
-                calculator(power);
-            });
-
-            document
-                .getElementById("squareRoot")
-                .addEventListener("click", () => {
-                    calculator(squareRoot);
-                });
-
-            // UI를 변경하여 고급 계산기를 표시하고, 고급 기능이 활성화 메시지를 화면에 출력하세요
-            const advance = document.getElementById("advance-calculator");
-            if (userState) {
-                advance.style.display = "block";
-                resultText.textContent = "고급 기능이 활성화되었습니다.";
-            }
-        } catch (error) {
-            // 에러 메시지를 콘솔 및 화면에 출력하세요
-            console.error(error);
-            resultText.textContent = `[오류] ${error}`;
-        }
-    } else {
-        // 권한이 없는 경우 "고급 계산기 사용 권한이 없습니다." 메시지를 화면에 출력해주세요.
-        resultText.textContent = "고급 계산기 사용 권한이 없습니다.";
-    }
-});
